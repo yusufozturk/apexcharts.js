@@ -83,13 +83,12 @@ class Legend {
 
     if (w.config.chart.type === 'heatmap') {
       const ranges = w.config.plotOptions.heatmap.colorScale.ranges
-      legendNames = ranges.map((colorScale) => {
-        return colorScale.name
-          ? colorScale.name
-          : colorScale.from + ' - ' + colorScale.to
+      legendNames = ranges.map((colorScale, index) => {
+        let c = Array.isArray(colorScale) ? colorScale[index] : colorScale
+        return c.name ? c.name : c.from + ' - ' + c.to
       })
-      fillcolor = ranges.map((color) => {
-        return color.color
+      fillcolor = ranges.map((color, index) => {
+        return Array.isArray(color) ? color[index].color : color.color
       })
     }
     let legendFormatter = w.globals.legendFormatter

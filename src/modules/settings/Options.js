@@ -325,7 +325,7 @@ export default class Options {
           radius: 2,
           enableShades: true,
           shadeIntensity: 0.5,
-          distributed: false,
+          distributed: false /* each series has it's own mix/max if false; while distributed: true takes the min/max from the combination of all series */,
           colorScale: {
             inverse: false,
             ranges: [],

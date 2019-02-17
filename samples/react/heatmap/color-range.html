@@ -63,7 +63,32 @@
               heatmap: {
                 shadeIntensity: 0.5,
                 colorScale: {
-                  ranges: [{
+                  ranges: [
+                    [{
+                      from: -30,
+                      to: 5,
+                      name: 'low',
+                      color: '#333'
+                    },
+                    {
+                      from: 6,
+                      to: 20,
+                      name: 'medium',
+                      color: '#222'
+                    },
+                    {
+                      from: 21,
+                      to: 45,
+                      name: 'high',
+                      color: '#111'
+                    },
+                    {
+                      from: 46,
+                      to: 55,
+                      name: 'extreme',
+                      color: '#999'
+                    }],
+                    [{
                       from: -30,
                       to: 5,
                       name: 'low',
@@ -86,7 +111,31 @@
                       to: 55,
                       name: 'extreme',
                       color: '#FF0000'
-                    }
+                    }], 
+                    [{
+                      from: -30,
+                      to: 5,
+                      name: 'low',
+                      color: '#00A100'
+                    },
+                    {
+                      from: 6,
+                      to: 20,
+                      name: 'medium',
+                      color: '#128FD9'
+                    },
+                    {
+                      from: 21,
+                      to: 45,
+                      name: 'high',
+                      color: '#FFB200'
+                    },
+                    {
+                      from: 46,
+                      to: 55,
+                      name: 'extreme',
+                      color: '#FF0000'
+                    }]
                   ]
                 }
               }

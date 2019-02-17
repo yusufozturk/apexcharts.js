@@ -216,12 +216,25 @@ export default class HeatMap {
     if (heatmap.colorScale.ranges.length > 0) {
       const colorRange = heatmap.colorScale.ranges
       colorRange.map((range, index) => {
-        if (val >= range.from && val <= range.to) {
-          color = range.color
-          min = range.from
-          max = range.to
+        let r = range
+        if (Array.isArray(range)) {
+          r = range[index]
+        }
+
+        const getTotal = (r) => {
+          color = r.color
+          min = r.from
+          max = r.to
           total = Math.abs(max) + Math.abs(min)
           percent = (100 * val) / total
+        }
+
+        if (
+          val >= r.from &&
+          val <= r.to &&
+          ((Array.isArray(range) && index === i) || !Array.isArray(range))
+        ) {
+          getTotal(r)
         }
       })
     }
