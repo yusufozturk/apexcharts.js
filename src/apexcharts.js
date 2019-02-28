@@ -23,12 +23,14 @@ import Toolbar from './modules/Toolbar'
 import Options from './modules/settings/Options'
 import Promise from 'promise-polyfill'
 
-import './svgjs/svg.js'
-import 'svg.filter.js'
-import 'svg.pathmorphing.js'
-import 'svg.draggable.js'
-import 'svg.select.js'
-import 'svg.resize.js'
+// import '@svgdotjs/svg.js'
+// import '@svgdotjs/svg.filter.js'
+// import '@svgdotjs/svg.draggable.js'
+// import 'svg.filter.js'
+// import 'svg.pathmorphing.js'
+// import 'svg.draggable.js'
+// import 'svg.select.js'
+// import 'svg.resize.js'
 
 import './assets/apexcharts.css'
 import './utils/ClassListPolyfill'
@@ -38,7 +40,6 @@ import en from './locales/en.json'
 
 // global Apex object which user can use to override chart's defaults globally
 window.Apex = {}
-
 /**
  *
  * @module ApexCharts

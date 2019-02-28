@@ -17,6 +17,7 @@ import Utils from '../utils/Utils'
 import Scales from './Scales'
 import Series from './Series'
 import TimeScale from './TimeScale'
+import SVG from '@svgdotjs/svg.js'
 
 /**
  * ApexCharts Core Class responsible for major calculations and creating elements.
