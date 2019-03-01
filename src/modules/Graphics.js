@@ -390,22 +390,22 @@ class Graphics {
 
     if (colorStops === null || colorStops.length === 0) {
       g = w.globals.dom.Paper.gradient(radial ? 'radial' : 'linear', function(
-        stop
+        add
       ) {
-        stop.at(stop1, gfrom, opacityFrom)
-        stop.at(stop2, gto, opacityTo)
-        stop.at(stop3, gto, opacityTo)
+        add.stop(stop1, gfrom, opacityFrom)
+        add.stop(stop2, gto, opacityTo)
+        add.stop(stop3, gto, opacityTo)
         if (stop4 !== null) {
-          stop.at(stop4, gfrom, opacityFrom)
+          add.stop(stop4, gfrom, opacityFrom)
         }
       })
     } else {
       g = w.globals.dom.Paper.gradient(radial ? 'radial' : 'linear', function(
-        stop
+        add
       ) {
         let stops = Array.isArray(colorStops[i]) ? colorStops[i] : colorStops
         stops.forEach((s) => {
-          stop.at(s.offset / 100, s.color, s.opacity)
+          add.stop(s.offset / 100, s.color, s.opacity)
         })
       })
     }

@@ -23,9 +23,9 @@ import Toolbar from './modules/Toolbar'
 import Options from './modules/settings/Options'
 import Promise from 'promise-polyfill'
 
-// import '@svgdotjs/svg.js'
-// import '@svgdotjs/svg.filter.js'
-// import '@svgdotjs/svg.draggable.js'
+import '@svgdotjs/svg.js'
+import '@svgdotjs/svg.filter.js'
+import '@svgdotjs/svg.draggable.js'
 // import 'svg.filter.js'
 // import 'svg.pathmorphing.js'
 // import 'svg.draggable.js'
@@ -690,7 +690,8 @@ export default class ApexCharts {
       draw.each(function(i, children) {
         this.removeClass('*')
         this.off()
-        this.stop()
+        // TODO: review later. currently commented as not supported in svgjs3.0
+        // this.stop()
       }, true)
       draw.ungroup()
       draw.clear()

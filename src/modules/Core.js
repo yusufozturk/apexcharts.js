@@ -17,7 +17,7 @@ import Utils from '../utils/Utils'
 import Scales from './Scales'
 import Series from './Series'
 import TimeScale from './TimeScale'
-import SVG from '@svgdotjs/svg.js'
+import SVG from '@svgdotjs/svg.js/src/svg'
 
 /**
  * ApexCharts Core Class responsible for major calculations and creating elements.
@@ -82,7 +82,8 @@ export default class Core {
     })
     this.el.appendChild(gl.dom.elWrap)
 
-    gl.dom.Paper = new window.SVG.Doc(gl.dom.elWrap)
+    gl.dom.Paper = new SVG().addTo(gl.dom.elWrap)
+
     gl.dom.Paper.attr({
       class: 'apexcharts-svg',
       'xmlns:data': 'ApexChartsNS',

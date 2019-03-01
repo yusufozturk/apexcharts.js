@@ -192,29 +192,34 @@ export default class Animations {
       speed = 1
     }
 
+    // TODO: replace this line once SVGjs team responds for ticket https://github.com/svgdotjs/svg.js/issues/973
+    delay = null
+
     el.plot(pathFrom)
       .animate(1, w.globals.easing, delay)
       .plot(pathFrom)
       .animate(speed, w.globals.easing, delay)
       .plot(pathTo)
-      .afterAll(() => {
-        // a flag to indicate that the original mount function can return true now as animation finished here
 
-        if (Utils.isNumber(j)) {
-          if (
-            j === w.globals.series[w.globals.maxValsInArrayIndex].length - 2 &&
-            w.globals.shouldAnimate
-          ) {
-            w.globals.animationEnded = true
-          }
-        } else if (w.globals.shouldAnimate) {
-          w.globals.animationEnded = true
-          if (typeof w.config.chart.events.animationEnd === 'function') {
-            w.config.chart.events.animationEnd(this.ctx, w)
-          }
-        }
+    // TODO: uncomment the below function
+    // .afterAll(() => {
+    //   // a flag to indicate that the original mount function can return true now as animation finished here
 
-        this.showDelayedElements()
-      })
+    //   if (Utils.isNumber(j)) {
+    //     if (
+    //       j === w.globals.series[w.globals.maxValsInArrayIndex].length - 2 &&
+    //       w.globals.shouldAnimate
+    //     ) {
+    //       w.globals.animationEnded = true
+    //     }
+    //   } else if (w.globals.shouldAnimate) {
+    //     w.globals.animationEnded = true
+    //     if (typeof w.config.chart.events.animationEnd === 'function') {
+    //       w.config.chart.events.animationEnd(this.ctx, w)
+    //     }
+    //   }
+
+    //   this.showDelayedElements()
+    // })
   }
 }
