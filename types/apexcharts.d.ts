@@ -11,9 +11,9 @@
 declare class ApexCharts {
   constructor(el: any, options: any);
   render(): Promise<void>;
-  updateOptions(options: any, redrawPaths: boolean, animate: boolean): Promise<void>;
-  updateSeries(newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries, animate: boolean): void;
-  appendSeries(newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries, animate: boolean): void;
+  updateOptions(options: any, redrawPaths?: boolean, animate?: boolean): Promise<void>;
+  updateSeries(newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries, animate?: boolean): void;
+  appendSeries(newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries, animate?: boolean): void;
   toggleSeries(seriesName: string): void;
   destroy(): void;
   addXaxisAnnotation(options: any, pushToMemory?: boolean, context?: any): void;
@@ -56,10 +56,10 @@ declare module ApexCharts {
 type ApexChart = {
   width?: string | number;
   height?: string | number;
-  type: "line" | "area" | "bar" | "histogram" | "pie" | "donut" |
+  type?: "line" | "area" | "bar" | "histogram" | "pie" | "donut" |
   "radialBar" | "scatter" | "bubble" | "heatmap" | "candlestick" | "radar";
   foreColor?: string;
-  fontFamily: string;
+  fontFamily?: string;
   background?: string;
   offsetX?: number;
   offsetY?: number;
