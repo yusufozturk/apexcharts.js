@@ -84,9 +84,9 @@ export default class Globals {
       maxYArr: [],
       maxX: -Number.MAX_VALUE, // is -1.7976931348623157e+308
       initialmaxX: -Number.MAX_VALUE,
-      minX: Number.MAX_VALUE, //  is 5e-324, i.e. the smallest positive number
-      initialminX: Number.MAX_VALUE,
-      minZ: Number.MAX_VALUE, // Max Z value in charts with Z axis
+      minX: Number.MIN_VALUE, //  is 5e-324, i.e. the smallest positive number
+      initialminX: Number.MIN_VALUE,
+      minZ: Number.MIN_VALUE, // Max Z value in charts with Z axis
       maxZ: -Number.MAX_VALUE, // Max Z value in charts with Z axis
       mousedown: false,
       lastClientPosition: {}, // don't reset this variable this the chart is destroyed. It is used to detect right or left mousemove in panning
@@ -96,7 +96,7 @@ export default class Globals {
       xRange: 0, // xAxis range
       yValueDecimal: 0, // are there floating numbers in the series. If yes, this represent the len of the decimals
       total: 0,
-      svgNS: 'http://www.w3.org/2000/svg', // svg namespace
+      SVGNS: 'http://www.w3.org/2000/svg', // svg namespace
       svgWidth: 0, // the whole svg width
       svgHeight: 0, // the whole svg height
       noData: false, // whether there is any data to display or not
@@ -158,7 +158,7 @@ export default class Globals {
       ttKeyFormatter: undefined,
       ttVal: undefined,
       ttZFormatter: undefined,
-      lineHeightRatio: 1.618,
+      LINE_HEIGHT_RATIO: 1.618,
       xAxisLabelsHeight: 0,
       yAxisLabelsWidth: 0,
       scaleX: 1,

@@ -48,16 +48,18 @@ class Fill {
       imgHeight = params.height
     }
 
-    let elPattern = document.createElementNS(w.globals.svgNS, 'pattern')
+    let elPattern = document.createElementNS(w.globals.SVGNS, 'pattern')
 
     Graphics.setAttrs(elPattern, {
       id: params.patternID,
-      patternUnits: 'userSpaceOnUse',
+      patternUnits: params.patternUnits
+        ? params.patternUnits
+        : 'userSpaceOnUse',
       width: imgWidth + 'px',
       height: imgHeight + 'px'
     })
 
-    let elImage = document.createElementNS(w.globals.svgNS, 'image')
+    let elImage = document.createElementNS(w.globals.SVGNS, 'image')
     elPattern.appendChild(elImage)
 
     elImage.setAttributeNS('http://www.w3.org/1999/xlink', 'href', fillImg)
@@ -146,6 +148,7 @@ class Fill {
         this.clippedImgArea({
           opacity: fillOpacity,
           image: cnf.fill.image.src[opts.seriesNumber],
+          patternUnits: opts.patternUnits,
           patternID: `pattern${w.globals.cuid}${opts.seriesNumber + 1}`
         })
         pathFill = `url(#pattern${w.globals.cuid}${opts.seriesNumber + 1})`

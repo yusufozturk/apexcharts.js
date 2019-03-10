@@ -25,9 +25,7 @@ class Line {
         this.w.config.chart.type !== 'scatter'
       ) || isPointsChart
 
-    if (this.pointsChart) {
-      this.scatter = new Scatter(this.ctx)
-    }
+    this.scatter = new Scatter(this.ctx)
 
     this.noNegatives = this.w.globals.minX === Number.MAX_VALUE
 
@@ -74,11 +72,19 @@ class Line {
         this.yaxisIndex = realIndex
       }
 
+      this.isReversed =
+        w.config.yaxis[this.yaxisIndex] &&
+        w.config.yaxis[this.yaxisIndex].reversed
+
       let yArrj = [] // hold y values of current iterating series
       let xArrj = [] // hold x values of current iterating series
 
       // zeroY is the 0 value in y series which can be used in negative charts
-      let zeroY = w.globals.gridHeight - baseLineY[this.yaxisIndex]
+      let zeroY =
+        w.globals.gridHeight -
+        baseLineY[this.yaxisIndex] -
+        (this.isReversed ? w.globals.gridHeight : 0) +
+        (this.isReversed ? baseLineY[this.yaxisIndex] * 2 : 0)
 
       let areaBottomY = zeroY
       if (zeroY > w.globals.gridHeight) {
@@ -187,7 +193,12 @@ class Line {
           : w.globals.dataPoints
       for (let j = 0; j < iterations; j++) {
         if (w.globals.isXNumeric) {
-          x = (w.globals.seriesX[realIndex][j + 1] - w.globals.minX) / xRatio
+          let sX = w.globals.seriesX[realIndex][j + 1]
+          if (typeof w.globals.seriesX[realIndex][j + 1] === 'undefined') {
+            /* fix #374 */
+            sX = w.globals.seriesX[realIndex][iterations - 1]
+          }
+          x = (sX - w.globals.minX) / xRatio
         } else {
           x = x + xDivision
         }
@@ -211,18 +222,36 @@ class Line {
             typeof series[i][j + 1] === 'undefined' ||
             series[i][j + 1] === null
           ) {
-            y = lineYPosition - minY / yRatio[this.yaxisIndex]
+            y =
+              lineYPosition -
+              minY / yRatio[this.yaxisIndex] +
+              (this.isReversed ? minY / yRatio[this.yaxisIndex] : 0) * 2
           } else {
-            y = lineYPosition - series[i][j + 1] / yRatio[this.yaxisIndex]
+            y =
+              lineYPosition -
+              series[i][j + 1] / yRatio[this.yaxisIndex] +
+              (this.isReversed
+                ? series[i][j + 1] / yRatio[this.yaxisIndex]
+                : 0) *
+                2
           }
         } else {
           if (
             typeof series[i][j + 1] === 'undefined' ||
             series[i][j + 1] === null
           ) {
-            y = zeroY - minY / yRatio[this.yaxisIndex]
+            y =
+              zeroY -
+              minY / yRatio[this.yaxisIndex] +
+              (this.isReversed ? minY / yRatio[this.yaxisIndex] : 0) * 2
           } else {
-            y = zeroY - series[i][j + 1] / yRatio[this.yaxisIndex]
+            y =
+              zeroY -
+              series[i][j + 1] / yRatio[this.yaxisIndex] +
+              (this.isReversed
+                ? series[i][j + 1] / yRatio[this.yaxisIndex]
+                : 0) *
+                2
           }
         }
 
@@ -603,9 +632,15 @@ class Line {
           // the first series will not have prevY values
           lineYPosition = zeroY
         }
-        prevY = lineYPosition - series[i][0] / yRatio
+        prevY =
+          lineYPosition -
+          series[i][0] / yRatio +
+          (this.isReversed ? series[i][0] / yRatio : 0) * 2
       } else {
-        prevY = zeroY - series[i][0] / yRatio
+        prevY =
+          zeroY -
+          series[i][0] / yRatio +
+          (this.isReversed ? series[i][0] / yRatio : 0) * 2
       }
     } else {
       // the first value in the current series is null

@@ -17,7 +17,6 @@ class Utils {
 
   // to extend defaults with user options
   // credit: http://stackoverflow.com/questions/27936772/deep-object-merging-in-es6-es7#answer-34749873
-  // credit: http://stackoverflow.com/questions/27936772/deep-object-merging-in-es6-es7#answer-34749873
   static extend(target, source) {
     if (typeof Object.assign !== 'function') {
       ;(function() {
@@ -238,8 +237,8 @@ class Utils {
         (Math.round((t - G) * p) + G) * 0x100 +
         (Math.round((t - B) * p) + B)
       )
-      .toString(16)
-      .slice(1)
+        .toString(16)
+        .slice(1)
     )
   }
 
@@ -249,25 +248,6 @@ class Utils {
     if (color.length > 7) return this.shadeRGBColor(p, color)
     else return this.shadeHexColor(p, color)
   }
-
-  // https://stackoverflow.com/questions/1573053/javascript-function-to-convert-color-names-to-hex-codes
-  // getHexColorFromName(colorStr) {
-  //   var a = document.createElement('div')
-  //   a.style.color = colorStr
-  //   var colors = window
-  //     .getComputedStyle(document.body.appendChild(a))
-  //     .color.match(/\d+/g)
-  //     .map(function(a) {
-  //       return parseInt(a, 10)
-  //     })
-  //   document.body.removeChild(a)
-  //   return colors.length >= 3
-  //     ? '#' +
-  //         ((1 << 24) + (colors[0] << 16) + (colors[1] << 8) + colors[2])
-  //           .toString(16)
-  //           .substr(1)
-  //     : false
-  // }
 
   static isColorHex(color) {
     return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)
@@ -283,8 +263,11 @@ class Utils {
   }
 
   static escapeString(str, escapeWith = 'x') {
-    let newStr = str.slice()
-    newStr = newStr.replace(/[` ~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, escapeWith)
+    let newStr = str.toString().slice()
+    newStr = newStr.replace(
+      /[` ~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
+      escapeWith
+    )
     return newStr
   }
 

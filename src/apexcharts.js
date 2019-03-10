@@ -406,12 +406,33 @@ export default class ApexCharts {
       this.revertDefaultAxisMinMax()
     }
     // user has set x-axis min/max externally - hence we need to forcefully set the xaxis min/max
-    if (options.xaxis && (options.xaxis.min || options.xaxis.max)) {
-      this.forceXAxisUpdate(options)
+    if (options.xaxis) {
+      if (options.xaxis.min || options.xaxis.max) {
+        this.forceXAxisUpdate(options)
+      }
+      /* fixes #369 */
+      if (
+        options.xaxis.categories &&
+        options.xaxis.categories.length &&
+        w.config.xaxis.tickPlacement === 'on'
+      ) {
+        const combo = CoreUtils.checkComboSeries(w.config.series)
+
+        if (
+          (w.config.chart.type === 'line' ||
+            w.config.chart.type === 'area' ||
+            w.config.chart.type === 'scatter') &&
+          !combo.comboChartsHasBars
+        ) {
+          options.xaxis.categories = []
+          options.labels = []
+        }
+      }
     }
     if (w.globals.collapsedSeriesIndices.length > 0) {
       this.clearPreviousPaths()
     }
+
     return this._updateOptions(options, redraw, animate, overwriteInitialConfig)
   }
 
